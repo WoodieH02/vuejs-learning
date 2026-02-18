@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Exampple!</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/normalize.css/normalize.css">
+    <style>
+        .green {
+            color: green;
+        }
+        .red {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <div>
+                <label for="">Enter your age: </label>
+                <input type="number" v-model="age">
+            </div>
+            <div>{{ message }}</div>
+            <div>Can you drive? <span :class="canDrive === 'Yes' ? 'green' : 'red'">{{ canDrive }}</span></div>
+        </div>
+    </div>
+    <script>
+    const {createApp, ref, computed} = Vue;
+    const app = {
+        setup(){
+            let message = ref('Hello!');
+            let age = ref(null);
+            let canDrive = computed(() => {
+                console.log('Computed!');
+                return age.value >= 18 ? 'Yes' : 'No';
+            });
+
+            setTimeout(() => {
+                console.log('Changing message');
+                message.value = 'Bye!';
+                age.value = 24;
+            }, 5000);
+
+            return {
+                message, 
+                canDrive,
+                age            
+            }
+        },
+    };
+    createApp(app).mount('#app');
+    </script>
+</body>
+</html>
