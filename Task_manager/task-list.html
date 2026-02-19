@@ -131,11 +131,6 @@
             }
         }
 
-       /*  watchEffect(() => {
-            localStorage.setItem('tasks', JSON.stringify(tasks.value));
-        });
-        */
-
         watch(tasks, () => {
             localStorage.setItem(
                 'tasks', 
